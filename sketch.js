@@ -88,18 +88,26 @@ function draw() {
 
   //Make Mario step(collide) on bricks  
  // ANya write code here
- mario.collide(bricksGroup);
-
+for(var i=0; i<bricksGroup.length; i++){
+   var temp = bricksGroup.get(i);
+   if(temp.isTouching(mario)){
+     mario.collide(temp);
+   }
+ }
 
     //call the function to generate coins
     generateCoins();
 
     //Make Mario catch the coin
     // ANya write code here
-    if(mario.isTouching(coinsGroup)){
-    coinSound.play();
-    coinScore=coinScore+1;
-    coinsGroup.destroyEach();
+    for(var i=0; i<coinsGroup.length; i++){
+      var temp = coinsGroup.get(i);
+      if(temp.isTouching(mario)){
+        coinSound.play();
+        coinScore++;
+        temp.destroy();
+        temp = null;
+      }
     }
         //play sound when coin in caught
       // ANya write code here
